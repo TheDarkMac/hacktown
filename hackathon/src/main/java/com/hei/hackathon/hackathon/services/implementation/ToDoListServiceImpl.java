@@ -39,17 +39,20 @@ public class ToDoListServiceImpl implements TodoListServices {
     }
 
     @Override
-    public String  updateTodoList(String todoId, ToDoListDto todoDto) {
+    public ToDoListDto  updateTodoList(String todoId, ToDoListDto updatedTodoDto) {
         ToDoList toDo = toDoListRepository.findById(todoId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("To do list with id " + todoId + " not found"));
-        toDo.setName(todoDto.getName());
-        return "To do list updated successfully !";
+
+        toDo.setName(updatedTodoDto.getName());
+
+        ToDoList updatedTodoList =  toDoListRepository.save(toDo);
+
+        return ToDoMapper.mapToToDoDto(updatedTodoList);
     }
 
     @Override
-    public String deleteTodoListById(String todoId) {
+    public void deleteTodoListById(String todoId) {
         toDoListRepository.deleteById(todoId);
-        return "To do list deleted with success !";
     }
 }

@@ -12,7 +12,7 @@ public interface TodoListServices {
 
     ToDoListDto  createTodoList(ToDoListDto toDo);
 
-    String  updateTodoList(String todoId, ToDoListDto todoDto);
+    ToDoListDto  updateTodoList(String todoId, ToDoListDto updatedTodoDto);
 
-    String deleteTodoListById(String todoId);
+    void deleteTodoListById(String todoId);
 }
