@@ -13,11 +13,11 @@ import java.util.List;
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/back/data/todoLists")
+@RequestMapping("/back/data")
 public class ToDoListController {
     TodoListServices todoListServices;
 
-    @GetMapping
+    @GetMapping("/todoLists")
     public ResponseEntity<List<ToDoListDto>> getToDoLists() {
         List<ToDoListDto> todoLists = todoListServices.getAllTodoList();
         return ResponseEntity.ok(todoLists);
@@ -29,7 +29,7 @@ public class ToDoListController {
         return ResponseEntity.ok(toDoList);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<ToDoListDto> addToDoList(@RequestBody ToDoListDto toDoListDto) {
         ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto);
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
