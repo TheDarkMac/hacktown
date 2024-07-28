@@ -25,7 +25,7 @@ public class ToDoListServiceImpl implements TodoListServices {
     }
 
     @Override
-    public ToDoListDto getTodoListByUserId(String toDoId) {
+    public ToDoListDto getTodoListById(String toDoId) {
         ToDoList toDoList = toDoListRepository.findById(toDoId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("To do list with id " + toDoId + " not found"));
@@ -33,9 +33,9 @@ public class ToDoListServiceImpl implements TodoListServices {
     }
 
     @Override
-    public String  createTodoList(ToDoListDto toDo) {
-        toDoListRepository.save(ToDoMapper.mapToToDoList(toDo));
-        return "To do list created successfully !";
+    public ToDoListDto  createTodoList(ToDoListDto toDo) {
+        ToDoList createdToDoList = toDoListRepository.save(ToDoMapper.mapToToDoList(toDo));
+        return ToDoMapper.mapToToDoDto(createdToDoList);
     }
 
     @Override

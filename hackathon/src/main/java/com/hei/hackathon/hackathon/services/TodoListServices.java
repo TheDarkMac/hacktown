@@ -8,9 +8,9 @@ import java.util.List;
 public interface TodoListServices {
     List<ToDoListDto> getAllTodoList();
 
-    ToDoListDto getTodoListByUserId(String toDoId);
+    ToDoListDto getTodoListById(String toDoId);
 
-    String  createTodoList(ToDoListDto toDo);
+    ToDoListDto  createTodoList(ToDoListDto toDo);
 
     String  updateTodoList(String todoId, ToDoListDto todoDto);
 
