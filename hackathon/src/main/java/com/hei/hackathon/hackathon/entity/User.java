@@ -23,6 +23,6 @@ public class User {
     private String userName;
 
     @Column (name = "password")
-    private byte[] password;
+    private String password;
 
 }

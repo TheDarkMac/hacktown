@@ -1,47 +1,65 @@
 package com.hei.hackathon.hackathon.services.implementation;
 
-import com.hei.hackathon.hackathon.services.CryptoService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+public class CryptoServiceImpl {
 
-
-@AllArgsConstructor
-@Service
-public class CryptoServiceImpl implements CryptoService {
-    final String ALGORITHM = "AES";
-    final byte[] KEY = "capdata2023capdat".getBytes();
-
-    @Override
-    public byte[] encryptPassword(String password)
-            throws NoSuchPaddingException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            IllegalBlockSizeException,
-            BadPaddingException {
-
-        SecretKey secretKey = new SecretKeySpec(KEY, ALGORITHM);
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-
-        return cipher.doFinal(password.getBytes());
+    public static int charCode(char c) {
+        c = Character.toUpperCase(c);
+        return (int) c - 65;
     }
 
-    @Override
-    public String decryptPassword(byte[] encryptedPassword)
-            throws NoSuchPaddingException,
-            NoSuchAlgorithmException,
-            InvalidKeyException,
-            IllegalBlockSizeException,
-            BadPaddingException {
+    public static String encrypts(String decrypted) {
+        String s = decrypted.toUpperCase();
+        StringBuilder result = new StringBuilder();
 
-        SecretKey secretKey = new SecretKeySpec(KEY, ALGORITHM);
-        Cipher cipher = Cipher.getInstance(ALGORITHM);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = decrypted.charAt(i);
 
-        return new String(cipher.doFinal(encryptedPassword));
+            if (Character.isLetter(currentChar)) {
+                boolean isUpperCase =
+                        (String.valueOf(currentChar)
+                                .equals(String.valueOf(currentChar).toUpperCase()));
+
+                int unicode = charCode(currentChar) + 13;
+                unicode = unicode % 26;
+                char res = (char) (unicode + 65);
+
+                if (isUpperCase) {
+                    result.append(res);
+                } else {
+                    result.append(Character.toLowerCase(res));
+                }
+            } else {
+                result.append(currentChar);
+            }
+        }
+        return result.toString();
+    }
+
+    public static String decrypts(String encrypted) {
+        String s = encrypted.toUpperCase();
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = encrypted.charAt(i);
+
+            if (Character.isLetter(currentChar)) {
+                boolean isUpperCase =
+                        (String.valueOf(currentChar)
+                                .equals(String.valueOf(currentChar).toUpperCase()));
+
+                int unicode = charCode(currentChar) + 13;
+                unicode = unicode % 26;
+                char res = (char) (unicode + 65);
+
+                if (isUpperCase) {
+                    result.append(res);
+                } else {
+                    result.append(Character.toLowerCase(res));
+                }
+            } else {
+                result.append(currentChar);
+            }
+        }
+        return result.toString();
     }
 }

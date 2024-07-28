@@ -1,8 +1,6 @@
 package com.hei.hackathon.hackathon.services;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
-import com.hei.hackathon.hackathon.entity.ToDoList;
-
 import java.util.List;
 
 public interface TodoListServices {

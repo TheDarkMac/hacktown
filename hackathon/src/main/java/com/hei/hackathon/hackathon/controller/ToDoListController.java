@@ -1,7 +1,6 @@
 package com.hei.hackathon.hackathon.controller;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
-import com.hei.hackathon.hackathon.entity.ToDoList;
 import com.hei.hackathon.hackathon.services.TodoListServices;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
