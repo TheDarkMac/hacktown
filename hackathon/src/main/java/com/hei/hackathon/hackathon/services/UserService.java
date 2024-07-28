@@ -1,4 +1,9 @@
 package com.hei.hackathon.hackathon.services;
 
-public class UserService {
+import com.hei.hackathon.hackathon.dto.UserDto;
+
+import java.util.List;
+
+public interface UserService {
+     List<UserDto> getAllUsers();
 }
