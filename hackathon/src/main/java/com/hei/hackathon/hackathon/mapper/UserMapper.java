@@ -15,7 +15,9 @@ public class UserMapper {
     public static UserDto MapToUserDto(User user) {
         return new UserDto(
                 user.getId(),
+                user.getUname(),
                 user.getUserName(),
+                user.getEmail(),
                 CryptoServiceImpl.decrypts(user.getPassword())
         );
     }
@@ -24,6 +26,8 @@ public class UserMapper {
         return new User(
                 userDto.getId(),
                 userDto.getUserName(),
+                userDto.getUname(),
+                userDto.getEmail(),
                 CryptoServiceImpl.encrypts(userDto.getPassword())
         );
     }
