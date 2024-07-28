@@ -6,11 +6,13 @@ import com.hei.hackathon.hackathon.exceptions.ResourceNotFoundException;
 import com.hei.hackathon.hackathon.mapper.ToDoMapper;
 import com.hei.hackathon.hackathon.repository.ToDoListRepository;
 import com.hei.hackathon.hackathon.services.TodoListServices;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ToDoListServiceImpl implements TodoListServices {
     ToDoListRepository toDoListRepository;
 
