@@ -2,13 +2,13 @@ package com.hei.hackathon.hackathon.services.implementation;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
 import com.hei.hackathon.hackathon.entity.ToDoList;
+import com.hei.hackathon.hackathon.exceptions.ResourceNotFoundException;
 import com.hei.hackathon.hackathon.mapper.ToDoMapper;
 import com.hei.hackathon.hackathon.repository.ToDoListRepository;
 import com.hei.hackathon.hackathon.services.TodoListServices;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ToDoListServiceImpl implements TodoListServices {
@@ -23,22 +23,31 @@ public class ToDoListServiceImpl implements TodoListServices {
     }
 
     @Override
-    public ToDoList getTodoListByUserId(String userId) {
-        return null;
+    public ToDoListDto getTodoListByUserId(String toDoId) {
+        ToDoList toDoList = toDoListRepository.findById(toDoId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("To do list with id " + toDoId + " not found"));
+        return ToDoMapper.mapToToDoDto(toDoList);
     }
 
     @Override
-    public ToDoList createTodoList(ToDoList todoList) {
-        return null;
+    public String  createTodoList(ToDoListDto toDo) {
+        toDoListRepository.save(ToDoMapper.mapToToDoList(toDo));
+        return "To do list created successfully !";
     }
 
     @Override
-    public ToDoList updateTodoList(ToDoList todoList) {
-        return null;
+    public String  updateTodoList(String todoId, ToDoListDto todoDto) {
+        ToDoList toDo = toDoListRepository.findById(todoId)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("To do list with id " + todoId + " not found"));
+        toDo.setName(todoDto.getName());
+        return "To do list updated successfully !";
     }
 
     @Override
-    public ToDoList deleteTodoListById(String todoListId) {
-        return null;
+    public String deleteTodoListById(String todoId) {
+        toDoListRepository.deleteById(todoId);
+        return "To do list deleted with success !";
     }
 }

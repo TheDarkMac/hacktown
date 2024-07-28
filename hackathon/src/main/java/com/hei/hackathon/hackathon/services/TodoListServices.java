@@ -8,11 +8,11 @@ import java.util.List;
 public interface TodoListServices {
     List<ToDoListDto> getAllTodoList();
 
-    ToDoList getTodoListByUserId(String userId);
+    ToDoListDto getTodoListByUserId(String toDoId);
 
-    ToDoList createTodoList(ToDoList todoList);
+    String  createTodoList(ToDoListDto toDo);
 
-    ToDoList updateTodoList(ToDoList todoList);
+    String  updateTodoList(String todoId, ToDoListDto todoDto);
 
-    ToDoList deleteTodoListById(String todoListId);
+    String deleteTodoListById(String todoId);
 }
