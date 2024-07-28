@@ -34,4 +34,17 @@ public class ToDoListController {
         ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto);
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ToDoListDto> updateToDoList(@PathVariable("id") String id, @RequestBody ToDoListDto toDoListDto) {
+        ToDoListDto updatedToDoList = todoListServices.updateTodoList(id,toDoListDto);
+        return ResponseEntity.ok(updatedToDoList);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteToDoList(@PathVariable("id") String id) {
+        todoListServices.deleteTodoListById(id);
+        return ResponseEntity.ok("To do list deleted with success !");
+    }
+
 }
