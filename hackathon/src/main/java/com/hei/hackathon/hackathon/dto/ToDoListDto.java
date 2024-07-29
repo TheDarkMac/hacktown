@@ -12,4 +12,5 @@ import lombok.Setter;
 public class ToDoListDto {
     private String id;
     private String name;
+    private long userId;
 }
