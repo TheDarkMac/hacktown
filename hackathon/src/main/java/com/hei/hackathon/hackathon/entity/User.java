@@ -1,13 +1,11 @@
 package com.hei.hackathon.hackathon.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+import java.util.Set;
+
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,5 +28,6 @@ public class User {
     @Column (name = "password", nullable = false)
     private String password;
 
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ToDoList> toDoLists;
 }
