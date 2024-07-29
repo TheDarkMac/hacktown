@@ -10,6 +10,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.stream.Collectors;
 
 public class UserMapper {
     public static UserDto MapToUserDto(User user) {
@@ -18,7 +19,8 @@ public class UserMapper {
                 user.getUname(),
                 user.getUserName(),
                 user.getEmail(),
-                CryptoServiceImpl.decrypts(user.getPassword())
+                CryptoServiceImpl.decrypts(user.getPassword()),
+                user.getToDoLists().stream().map(ToDoMapper::mapToToDoDto).collect(Collectors.toSet())
         );
     }
 
@@ -28,7 +30,8 @@ public class UserMapper {
                 userDto.getUserName(),
                 userDto.getUname(),
                 userDto.getEmail(),
-                CryptoServiceImpl.encrypts(userDto.getPassword())
+                CryptoServiceImpl.encrypts(userDto.getPassword()),
+                userDto.getToDoListDtos().stream().map(ToDoMapper::mapToToDoList).collect(Collectors.toSet())
         );
     }
 }
