@@ -13,4 +13,6 @@ public interface UserService {
      UserDto updateUser(long id, UserDto userDto);
 
      void deleteUser(long userId);
+
+     boolean checkUser(UserDto userDto);
 }

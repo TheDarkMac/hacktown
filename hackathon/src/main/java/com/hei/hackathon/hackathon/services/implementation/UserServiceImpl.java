@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
+import java.awt.desktop.UserSessionEvent;
 import java.util.List;
 
 @AllArgsConstructor
@@ -63,5 +64,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(long useId) {
         userRepository.deleteById(useId);
+    }
+
+    @Override
+    public boolean checkUser(UserDto userDto) {
+        User user = UserMapper.MapToUser(userDto);
+        List<User> userList = userRepository.findAll();
+        for(User u : userList) {
+            if (u.getUname().equals(user.getUname()) && u.getUserName().equals(user.getUserName())
+            && u.getEmail().equals(user.getEmail()) && u.getPassword().equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

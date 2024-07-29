@@ -22,25 +22,25 @@ public class ToDoListController {
         return ResponseEntity.ok(todoLists);
     }
 
-    @GetMapping("{toDoListId}")
+    @GetMapping("/todoLists/{toDoListId}")
     public ResponseEntity<ToDoListDto> getToDoList(@PathVariable("toDoListId") String toDoListId) {
         ToDoListDto toDoList = todoListServices.getTodoListById(toDoListId);
         return ResponseEntity.ok(toDoList);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/todoLists/add")
     public ResponseEntity<ToDoListDto> addToDoList(@RequestBody ToDoListDto toDoListDto) {
         ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto);
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/todoLists/update/{id}")
     public ResponseEntity<ToDoListDto> updateToDoList(@PathVariable("id") String id, @RequestBody ToDoListDto toDoListDto) {
         ToDoListDto updatedToDoList = todoListServices.updateTodoList(id,toDoListDto);
         return ResponseEntity.ok(updatedToDoList);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/todoLists/delete/{id}")
     public ResponseEntity<String> deleteToDoList(@PathVariable("id") String id) {
         todoListServices.deleteTodoListById(id);
         return ResponseEntity.ok("To do list deleted with success !");

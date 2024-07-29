@@ -28,6 +28,13 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
+    @PostMapping("/login/users")
+    public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
+        Boolean check = userService.checkUser(userDto);
+        return (check) ? new ResponseEntity<>(true, HttpStatus.FOUND)
+                : new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/users/add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
         UserDto addUser = userService.createUser(userDto);
