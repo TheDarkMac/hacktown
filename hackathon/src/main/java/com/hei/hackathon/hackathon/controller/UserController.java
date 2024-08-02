@@ -31,8 +31,7 @@ public class UserController {
     @PostMapping("/login/users")
     public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
         Boolean check = userService.checkUser(userDto);
-        return (check) ? new ResponseEntity<>(true, HttpStatus.FOUND)
-                : new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PostMapping("/users/add")

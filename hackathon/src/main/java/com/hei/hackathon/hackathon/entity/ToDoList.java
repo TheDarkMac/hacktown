@@ -20,7 +20,7 @@ public class ToDoList {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 }
 

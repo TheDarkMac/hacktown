@@ -1,7 +1,9 @@
 package com.hei.hackathon.hackathon.services.implementation;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
+import com.hei.hackathon.hackathon.dto.UserDto;
 import com.hei.hackathon.hackathon.entity.ToDoList;
+import com.hei.hackathon.hackathon.entity.User;
 import com.hei.hackathon.hackathon.exceptions.ResourceNotFoundException;
 import com.hei.hackathon.hackathon.mapper.ToDoMapper;
 import com.hei.hackathon.hackathon.repository.ToDoListRepository;
@@ -33,8 +35,8 @@ public class ToDoListServiceImpl implements TodoListServices {
     }
 
     @Override
-    public ToDoListDto  createTodoList(ToDoListDto toDo) {
-        ToDoList createdToDoList = toDoListRepository.save(ToDoMapper.mapToToDoList(toDo));
+    public ToDoListDto  createTodoList(ToDoListDto toDo, User user) {
+        ToDoList createdToDoList = toDoListRepository.save(ToDoMapper.mapToToDoList(toDo, user));
         return ToDoMapper.mapToToDoDto(createdToDoList);
     }
 

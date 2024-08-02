@@ -3,14 +3,16 @@ package com.hei.hackathon.hackathon.mapper;
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
 import com.hei.hackathon.hackathon.dto.UserDto;
 import com.hei.hackathon.hackathon.entity.ToDoList;
+import com.hei.hackathon.hackathon.entity.User;
 import com.hei.hackathon.hackathon.repository.UserRepository;
 import com.hei.hackathon.hackathon.services.UserService;
 import com.hei.hackathon.hackathon.services.implementation.UserServiceImpl;
+import lombok.AllArgsConstructor;
+
 
 public class ToDoMapper {
-    private static UserService userService;
-    public static ToDoListDto mapToToDoDto(ToDoList toDoList){
 
+    public static ToDoListDto mapToToDoDto(ToDoList toDoList){
         return new ToDoListDto(
                 toDoList.getId(),
                 toDoList.getName(),
@@ -19,11 +21,17 @@ public class ToDoMapper {
     }
 
     public static ToDoList mapToToDoList(ToDoListDto toDoListDto){
-        UserDto userDto = userService.getUserById(toDoListDto.getUserId());
         return new ToDoList(
                 toDoListDto.getId(),
                 toDoListDto.getName(),
-                UserMapper.MapToUser(userDto)
+                null
+        );
+    }
+    public static ToDoList mapToToDoList(ToDoListDto toDoListDto, User user){
+        return new ToDoList(
+                toDoListDto.getId(),
+                toDoListDto.getName(),
+                user
         );
     }
 }

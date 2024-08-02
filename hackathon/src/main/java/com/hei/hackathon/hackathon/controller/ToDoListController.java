@@ -1,7 +1,13 @@
 package com.hei.hackathon.hackathon.controller;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
+import com.hei.hackathon.hackathon.dto.UserDto;
+import com.hei.hackathon.hackathon.entity.ToDoList;
+import com.hei.hackathon.hackathon.entity.User;
+import com.hei.hackathon.hackathon.mapper.ToDoMapper;
+import com.hei.hackathon.hackathon.mapper.UserMapper;
 import com.hei.hackathon.hackathon.services.TodoListServices;
+import com.hei.hackathon.hackathon.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +21,7 @@ import java.util.List;
 @RequestMapping("/back/data")
 public class ToDoListController {
     TodoListServices todoListServices;
+    UserService userService;
 
     @GetMapping("/todoLists")
     public ResponseEntity<List<ToDoListDto>> getToDoLists() {
@@ -30,7 +37,11 @@ public class ToDoListController {
 
     @PostMapping("/todoLists/add")
     public ResponseEntity<ToDoListDto> addToDoList(@RequestBody ToDoListDto toDoListDto) {
-        ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto);
+        UserDto userDto = userService.getUserById(toDoListDto.getUserId());
+        User user = UserMapper.MapToUser(userDto);
+
+        ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto, user);
+
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
     }
 
