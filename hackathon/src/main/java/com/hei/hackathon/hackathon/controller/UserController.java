@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(userDto);
     }
 
-    @PostMapping("/login/users")
+    @PostMapping("/users/authentication")
     public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
         Boolean check = userService.checkUser(userDto);
         return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
