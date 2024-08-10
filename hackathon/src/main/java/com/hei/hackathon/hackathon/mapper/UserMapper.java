@@ -14,7 +14,7 @@ public class UserMapper {
                 user.getUserName(),
                 user.getEmail(),
                 CryptoServiceImpl.decrypts(user.getPassword()),
-                user.getToDoLists().stream().map(ToDoMapper::mapToToDoDto).collect(Collectors.toSet())
+                user.getToDoLists().stream().map(ToDoMapper::mapToToDoDto).toList()
         );
     }
 
@@ -27,7 +27,7 @@ public class UserMapper {
                 userDto.getToDoListDtos()
                         .stream()
                         .map(toDoListDto -> ToDoMapper.mapToToDoList(toDoListDto))
-                        .collect(Collectors.toSet())
+                        .toList()
         );
     }
 }
