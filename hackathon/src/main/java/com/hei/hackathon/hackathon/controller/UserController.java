@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin("*")
@@ -22,15 +21,15 @@ public class UserController {
         return ResponseEntity.ok(userDtoList);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable long id) {
-        UserDto userDto = userService.getUserById(id);
+    @GetMapping("/users/{userName}")
+    public ResponseEntity<UserDto> getUser(@PathVariable String userName) {
+        UserDto userDto = userService.getUserById(userName);
         return ResponseEntity.ok(userDto);
     }
 
     @PostMapping("/users/authentication")
     public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
-        Boolean check = userService.checkUser(userDto);
+        Boolean check = userService.checkUserLogin(userDto);
         return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
@@ -40,15 +39,15 @@ public class UserController {
         return new ResponseEntity<>(addUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("/users/update/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") long id, @RequestBody UserDto userDto) {
-        UserDto updateUser = userService.updateUser(id, userDto);
+    @PutMapping("/users/update/{userName}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable("userName") String userName, @RequestBody UserDto userDto) {
+        UserDto updateUser = userService.updateUser(userName, userDto);
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
 
-    @DeleteMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/users/delete/{userName}")
+    public String deleteUser(@PathVariable("userName") String  userName) {
+        userService.deleteUser(userName);
         return "User deleted with success !";
     }
 

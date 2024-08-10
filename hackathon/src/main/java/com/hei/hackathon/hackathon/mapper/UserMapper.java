@@ -10,7 +10,6 @@ public class UserMapper {
     private static ToDoMapper toDoMapper;
     public static UserDto MapToUserDto(User user) {
         return new UserDto(
-                user.getId(),
                 user.getUname(),
                 user.getUserName(),
                 user.getEmail(),
@@ -21,7 +20,6 @@ public class UserMapper {
 
     public static User MapToUser(UserDto userDto) {
         return new User(
-                userDto.getId(),
                 userDto.getUserName(),
                 userDto.getUname(),
                 userDto.getEmail(),

@@ -37,7 +37,7 @@ public class ToDoListController {
 
     @PostMapping("/todoLists/add")
     public ResponseEntity<ToDoListDto> addToDoList(@RequestBody ToDoListDto toDoListDto) {
-        UserDto userDto = userService.getUserById(toDoListDto.getUserId());
+        UserDto userDto = userService.getUserById(toDoListDto.getUserName());
         User user = UserMapper.MapToUser(userDto);
 
         ToDoListDto addedToDoList = todoListServices.createTodoList(toDoListDto, user);
@@ -45,7 +45,7 @@ public class ToDoListController {
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
     }
 
-    @PutMapping("/todoLists/update/{id}")
+    @PatchMapping("/todoLists/update/{id}")
     public ResponseEntity<ToDoListDto> updateToDoList(@PathVariable("id") String id, @RequestBody ToDoListDto toDoListDto) {
         ToDoListDto updatedToDoList = todoListServices.updateTodoList(id,toDoListDto);
         return ResponseEntity.ok(updatedToDoList);

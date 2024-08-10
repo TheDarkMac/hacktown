@@ -12,14 +12,11 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String userName;
 
     @Column(name = "Uname", nullable = false)
     private String uname;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
 
     @Column(name = "email", nullable = false)
     private String email;

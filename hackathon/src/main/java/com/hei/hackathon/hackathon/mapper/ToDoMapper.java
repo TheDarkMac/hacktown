@@ -14,14 +14,16 @@ public class ToDoMapper {
 
     public static ToDoListDto mapToToDoDto(ToDoList toDoList){
         return new ToDoListDto(
+                toDoList.getIdLong(),
                 toDoList.getId(),
                 toDoList.getName(),
-                toDoList.getUser().getId()
+                toDoList.getUser().getUserName()
         );
     }
 
     public static ToDoList mapToToDoList(ToDoListDto toDoListDto){
         return new ToDoList(
+                toDoListDto.getIdNumber(),
                 toDoListDto.getId(),
                 toDoListDto.getName(),
                 null
@@ -29,6 +31,7 @@ public class ToDoMapper {
     }
     public static ToDoList mapToToDoList(ToDoListDto toDoListDto, User user){
         return new ToDoList(
+                toDoListDto.getIdNumber(),
                 toDoListDto.getId(),
                 toDoListDto.getName(),
                 user

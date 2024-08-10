@@ -3,15 +3,13 @@ package com.hei.hackathon.hackathon.services.implementation;
 import com.hei.hackathon.hackathon.dto.UserDto;
 import com.hei.hackathon.hackathon.entity.User;
 import com.hei.hackathon.hackathon.exceptions.ResourceNotFoundException;
+import com.hei.hackathon.hackathon.exceptions.ResourcesDuplicatedException;
 import com.hei.hackathon.hackathon.mapper.UserMapper;
 import com.hei.hackathon.hackathon.repository.UserRepository;
 import com.hei.hackathon.hackathon.services.UserService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
-
-import java.awt.desktop.UserSessionEvent;
 import java.util.List;
 
 @AllArgsConstructor
@@ -30,25 +28,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUserById(long id) {
-        User user = userRepository.findById(id)
+    public UserDto getUserById(String userName) {
+        User user = userRepository.findById(userName)
                 .orElseThrow( () ->
-                        new ResourceNotFoundException("User with id " + id + " wasn't found !")
+                        new ResourceNotFoundException("User with id " + userName + " wasn't found !")
                 );
         return UserMapper.MapToUserDto(user);
     }
 
     @Override
     public UserDto createUser(UserDto userDto) {
+        if (!checkUserNameUnity(userDto)) {
+            throw new ResourcesDuplicatedException("This user is already registered !");
+        }
         User addedUser = userRepository.save(UserMapper.MapToUser(userDto));
         return UserMapper.MapToUserDto(addedUser);
     }
 
     @Override
-    public UserDto updateUser(long id, UserDto userDto) {
-        User user = userRepository.findById(id)
+    public UserDto updateUser(String userName, UserDto userDto) {
+        User user = userRepository.findById(userName)
                 .orElseThrow( () ->
-                        new ResourceNotFoundException("User with id " + id + " wasn't found !")
+                        new ResourceNotFoundException("User with id " + userName + " wasn't found !")
                 );
 
         user.setUname(userDto.getUname());
@@ -62,20 +63,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long useId) {
-        userRepository.deleteById(useId);
+    public void deleteUser(String userName) {
+        userRepository.deleteById(userName);
     }
 
     @Override
-    public boolean checkUser(UserDto userDto) {
+    public boolean checkUserLogin(UserDto userDto) {
         User user = UserMapper.MapToUser(userDto);
         List<User> userList = userRepository.findAll();
         for(User u : userList) {
-            if (u.getUname().equals(user.getUname()) && u.getUserName().equals(user.getUserName())
-            && u.getEmail().equals(user.getEmail()) && u.getPassword().equals(user.getPassword())) {
+            if (u.getUserName().equals(user.getUserName())
+            && u.getPassword().equals(user.getPassword())
+            && u.getEmail().equals(user.getEmail())) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean checkUserNameUnity(UserDto userDto) {
+        List<User> userList = userRepository.findAll();
+        for(User u : userList) {
+            if (u.getUname().equals(userDto.getUname())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
