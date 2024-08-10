@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ToDoListDto {
-    private long idNumber;
-    private String id;
+    private long id;
+    private String signature;
     private String name;
     private String userName;
 }

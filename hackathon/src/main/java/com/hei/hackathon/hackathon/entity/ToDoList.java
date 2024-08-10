@@ -15,10 +15,11 @@ import lombok.Setter;
 public class ToDoList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idLong;
+    @Column (name = "todo_id")
+    private long id;
 
-    @Column(name = "identification")
-    private String id;
+    @Column(name = "signature")
+    private String signature;
 
     @Column(name = "name", nullable = false)
     private String name;
