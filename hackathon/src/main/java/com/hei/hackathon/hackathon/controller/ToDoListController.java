@@ -45,7 +45,7 @@ public class ToDoListController {
         return new ResponseEntity<>(addedToDoList, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/todoLists/update/{id}")
+    @PutMapping("/todoLists/update/{id}")
     public ResponseEntity<ToDoListDto> updateToDoList(@PathVariable("id") String id, @RequestBody ToDoListDto toDoListDto) {
         ToDoListDto updatedToDoList = todoListServices.updateTodoList(id,toDoListDto);
         return ResponseEntity.ok(updatedToDoList);
