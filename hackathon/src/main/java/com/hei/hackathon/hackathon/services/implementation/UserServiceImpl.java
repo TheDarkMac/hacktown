@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow( () ->
                         new ResourceNotFoundException("User with id " + userName + " wasn't found !")
                 );
-        return UserMapper.MapToUserDto(user);
+        return UserMapper.MapToUserDto2(user);
     }
 
     @Override

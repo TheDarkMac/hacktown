@@ -2,9 +2,7 @@ package com.hei.hackathon.hackathon.controller;
 
 import com.hei.hackathon.hackathon.dto.ToDoListDto;
 import com.hei.hackathon.hackathon.dto.UserDto;
-import com.hei.hackathon.hackathon.entity.ToDoList;
 import com.hei.hackathon.hackathon.entity.User;
-import com.hei.hackathon.hackathon.mapper.ToDoMapper;
 import com.hei.hackathon.hackathon.mapper.UserMapper;
 import com.hei.hackathon.hackathon.services.TodoListServices;
 import com.hei.hackathon.hackathon.services.UserService;
@@ -12,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @CrossOrigin("*")

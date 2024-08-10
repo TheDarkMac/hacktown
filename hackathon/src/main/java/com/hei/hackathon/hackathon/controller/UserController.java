@@ -30,7 +30,7 @@ public class UserController {
     @PostMapping("/users/authentication")
     public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
         Boolean check = userService.checkUserLogin(userDto);
-        return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @PostMapping("/users/add")
