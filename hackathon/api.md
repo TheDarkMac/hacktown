@@ -2,36 +2,124 @@
 
 #   User REST AIP Documentation :
 -   user login :
-    -   `http://ip:8080/back/data/users/authentication`
+    -   `POST / http://ip:8080/back/data/users/authentication`
+      - status code: 
+        - `200` (success) or `403`(wrong inputs)
     
 -   get all users :
-    -  `http://ip:8080/back/data/users`
+    -  `GET / http://ip:8080/back/data/users`
+    - return type : 
+      - status code: `200`
+        - body: list of users
+          - Exemple :
+          ```
+          [
+            {
+              "uname" : "...",
+              "userName": "...",
+              "email" : "...",
+              "password" : "******",
+              "toDoListDtos" = []
+            }
+          ]
 
 -   get a user by id :
-    -  `http://ip:8080/back/data/users/id`
+    -  `GET / http://ip:8080/back/data/users/username`
+    - return type :
+      - status code : `200`
+        - body :
+          ```
+          {
+            "uname" : "...",
+            "userName": "...",
+            "email" : "...",
+            "password" : "******",
+            "toDoListDtos" = []
+          }
     
 -   create a user :
-    -  `http://ip:8080/back/data/users/add`
+    -  `POST / http://ip:8080/back/data/users/add`
+    - status code : `201`
+    - body type :
+      ```
+           {
+              "uname" : "John Doe",
+              "userName": "Doe",
+              "email" : "john@doe.com",
+              "password" : "johndoe"
+           }
 
 -   update a user information :
-    -  `http://ip:8080/back/data/users/update/id`
+    -  `PUT / http://ip:8080/back/data/users/update/username`
+    - status code : `200`
+    - body type :
+    ```
+            {
+              "uname" : "...",
+              "userName": "...",
+              "email" : "...",
+              "password" : "******",
+              "toDoListDtos" = []
+            }
 
 -   delete a user :
-    -   `http://ip:8080/back/data/users/delete/id`
+    -   `DELETE / http://ip:8080/back/data/users/delete/username`
+    - return type : `string`
 
 #   To do lists :
 
 -   all to do lists : 
-    -   `http://ip:8080/back/data/todoLists`
+    -   `GET / http://ip:8080/back/data/todoLists`
+    - status code : `200`
+    - return type : List of to do list.
+      - Example :
+    ```
+    [
+        {
+            "id" : "...",
+            "signature": "...",
+            "name" : "...",
+            "userName" : "..."
+        }
+    ]
+    
 
 -   get a specific to do list by its id :
-    -   `http://ip:8080/back/data/todoLists/id`
+    -   `GET / http://ip:8080/back/data/todoLists/id`
+    - status code : `200`
+    - return type :
+    ```
+    {
+        "id" : "...",
+        "signature": "...",
+        "name" : "...",
+        "userName" : "..."
+    }
 
--   get add a new to do list to a user :
-    -   `http://ip:8080/back/data/todoLists/add` 
+-   add a new to do list to a user :
+    -   `GET / http://ip:8080/back/data/todoLists/add`
+    - status code : `201`
+    - body type :
+    ```
+    {
+        "id" : "...",
+        "signature": "...",
+        "name" : "...",
+        "userName" : "..."
+    }
+    
 
 -   update a to do list by its id :
-    -   `http://ip:8080/back/data/todoLists/update/id` 
+    -   `PUT / http://ip:8080/back/data/todoLists/update/id`
+    - status code : `200`
+    - body type :
+    ```
+    {
+        "id" : "...",
+        "signature": "...",
+        "name" : "...",
+        "userName" : "..."
+    }
 
 -   delete a specific to do list by its id :
-    -    `http://ip:8080/back/data/todoLists/delete/id`
+    -    `DELETE / http://ip:8080/back/data/todoLists/delete/id`
