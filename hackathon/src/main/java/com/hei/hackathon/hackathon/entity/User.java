@@ -3,7 +3,7 @@ package com.hei.hackathon.hackathon.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,5 +26,5 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToDoList> toDoLists;
+    private List<ToDoList> toDoLists;
 }

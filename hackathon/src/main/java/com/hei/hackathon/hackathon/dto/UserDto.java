@@ -1,9 +1,8 @@
 package com.hei.hackathon.hackathon.dto;
 
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,5 +13,5 @@ public class UserDto {
     private String userName;
     private String email;
     private String password;
-    private Set<ToDoListDto> toDoListDtos = new HashSet<>();
+    private List<ToDoListDto> toDoListDtos = new ArrayList<>();
 }
