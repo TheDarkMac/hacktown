@@ -10,15 +10,6 @@ public class UserMapper {
                 user.getUname(),
                 user.getUserName(),
                 user.getEmail(),
-                CryptoServiceImpl.decrypts(user.getPassword()),
-                user.getToDoLists().stream().map(ToDoMapper::mapToToDoDto).toList()
-        );
-    }
-    public static UserDto MapToUserDto2(User user) {
-        return new UserDto(
-                user.getUname(),
-                user.getUserName(),
-                user.getEmail(),
                 "******",
                 user.getToDoLists().stream().map(ToDoMapper::mapToToDoDto).toList()
         );
