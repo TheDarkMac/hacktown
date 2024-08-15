@@ -29,7 +29,9 @@ public class UserController {
 
     @PostMapping("/users/authentication")
     public ResponseEntity<Boolean> loginUser(@RequestBody UserDto userDto) {
+        System.out.println(userDto.toString());
         Boolean check = userService.checkUserLogin(userDto);
+        System.out.println(check);
         return (check) ? ResponseEntity.ok(true) : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
